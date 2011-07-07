@@ -1,0 +1,72 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>iCrack</title>
+  <style type="text/css" media="screen">@import "js/jqtouch/jqtouch.css";</style>
+  <style type="text/css" media="screen">@import "js/themes/apple/theme.css";</style>
+  <script src="js/jqtouch/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/jquery/jquery.media.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="js/jqtouch/jqtouch.js" type="application/x-javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="clock.css" type="text/css" media="screen" charset="utf-8" />
+  <script type="text/javascript" charset="utf-8">
+    $.jQTouch({
+      icon: 'images/icon.png',
+      startupScreen: 'imags/homescreen.png',
+      statusBar: 'black-translucent'
+    });
+
+    (function($) {
+      var cache = [];
+      // Arguments are image paths relative to the current page.
+      $.preLoadImages = function() {
+        var args_len = arguments.length;
+        for (var i = args_len; i--;) {
+          var cacheImage = document.createElement('img');
+          cacheImage.src = arguments[i];
+          cache.push(cacheImage);
+        }
+      }
+    })(jQuery);
+
+    $.preLoadImages('images/homescreen.png', 'images/glass-cracked.jpg');
+    var audioElement = new Audio('sounds/cracked.wav');
+    audioElement.load();
+
+    $(function(){
+      var cracked = false;
+
+      $('#start').bind('tap', function(e){
+          audioElement.play();
+      }); 
+
+      $('#screen').bind('swipe', function(e){
+        $('#screen').attr('src', 'images/homescreen.png');
+        cracked = false;
+      }); 
+      //window.addEventListener('deviceorientation', function(e){
+      window.addEventListener('devicemotion', function(e){
+        var x = event.acceleration.x;
+        var y = event.acceleration.y;
+        var z = event.acceleration.z;
+        if (!cracked && (x > 7 || y > 7 || z > 7)) {
+          cracked = true;
+          audioElement.play();
+          $('#screen').attr('src', 'images/glass-cracked.jpg');
+        }
+      },false);
+    });
+  </script>
+</head>
+
+<body onload>
+  <div id="jqt">
+    <div id="start">
+        <br><br><br><br><br>
+        <a class="grayButton slideup" href=#home>Start</a>
+    </div>
+    <div id="home">
+      <img width=100% id="screen" src=images/homescreen.png />
+    </div>
+  </div>
+</body>
+</html>
