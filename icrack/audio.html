@@ -1,0 +1,32 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>iCrack</title>
+  <style type="text/css" media="screen">@import "js/jqtouch/jqtouch.css";</style>
+  <style type="text/css" media="screen">@import "js/themes/apple/theme.css";</style>
+  <script src="js/jqtouch/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/jqtouch/jqtouch.js" type="application/x-javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+    (function($) {
+      var cache = [];
+      // Arguments are image paths relative to the current page.
+      $.preLoadImages = function() {
+        var args_len = arguments.length;
+        for (var i = args_len; i--;) {
+          var cacheImage = document.createElement('img');
+          cacheImage.src = arguments[i];
+          cache.push(cacheImage);
+        }
+      }
+    })(jQuery);
+
+    var audioElement = new Audio('sounds/cracked.wav');
+    audioElement.load();
+  </script>
+</head>
+<body>
+  <div id="jqt">
+     <a href=javascript:audioElement.play()>Play</a>
+  </div>
+</body>
+</html>
