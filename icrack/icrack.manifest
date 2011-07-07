@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#Version: 002
+#Version: 003
 
 CACHE:
 images/glass-cracked.jpg
@@ -67,7 +67,7 @@ js/themes/jqt/img/toggleOn.png
 js/themes/jqt/img/toolbar.png
 js/themes/jqt/img/whiteButton.png
 js/themes/jqt/theme.css
-sounds/cracked.wav
 
-CACHE:
+NETWORK:
+sounds/cracked.wav
 
